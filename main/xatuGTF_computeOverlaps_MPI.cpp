@@ -19,14 +19,14 @@ int main(int argc, char* argv[]){
     }
 
     // INPUT PARAMETERS /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    std::string outp_file = "InputFiles/Pho_PBE0_1D_0f.outp";
-    int ncells = 43;                                  //Number of H(R) and S(R) matrices taken into account from the .outp file
-    std::string bases_file = "InputFiles/Bases_custom.txt";
-    std::string savefile = "custom";        //Result will be saved in file Results/1-Integrals/o2Mat_savefile.o2c & o3Mat_savefile.o3c
-    int nR = 80;                                     //Minimum number of direct lattice vectors for which the 2-center overlap integrals will be computed
-    int nR2 = 80;                                    //Square root of the minimum number of direct lattice vectors for which the 3-center overlap integrals will be computed
+    std::string outp_file = "InputFiles/hBN_HSE06_def2_TZVP.outp";
+    int ncells = 149;                                 //Number of H(R) and S(R) matrices taken into account from the .outp file
+    std::string bases_file = "InputFiles/Bases_def2-TZVP-RIFIT.txt";
+    std::string savefile = "hBN";        //Result will be saved in file Results/1-Integrals/o2Mat_savefile.o2c & o3Mat_savefile.o3c
+    int nR = 200;                                     //Minimum number of direct lattice vectors for which the 2-center overlap integrals will be computed
+    int nR2 = 60;                                    //Square root of the minimum number of direct lattice vectors for which the 3-center overlap integrals will be computed
     int tol2C = 10;                                   //Threshold tolerance for the overlap 2C integrals: only entries > 10^-tol are stored
-    int tol3C = 8;                                    //Threshold tolerance for the overlap 3C integrals: only entries > 10^-tol are stored
+    int tol3C = 6;                                    //Threshold tolerance for the overlap 3C integrals: only entries > 10^-tol are stored
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     xatu::ConfigurationCRYSTAL_MPI CRYSTALconfig(outp_file, procMPI_rank, procMPI_size, ncells, true);

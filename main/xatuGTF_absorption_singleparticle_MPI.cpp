@@ -1,5 +1,6 @@
 // #define ARMA_ALLOW_FAKE_GCC
 #include <mpi.h>
+#include <tclap/CmdLine.h>
 #include "xatu.hpp"
 
 // Based on the Delta function (real part of i*Lorentzian), computes only the first ndim components in the diagonal of the absorption tensor.
@@ -23,17 +24,17 @@ int main(int argc, char* argv[]){
     }
 
     // INPUT PARAMETERS /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    std::string outp_file = "InputFiles/Pho_PBE0_1D_0f.outp";
-    int ncells = 43;                     //Number of H(R) and S(R) matrices taken into account from the .outp file
-    std::string intName = "custom";      //For the dipole integrals
+    std::string outp_file = "InputFiles/hBN_HSE06.outp";
+    int ncells = 179;                               //Number of H(R) and S(R) matrices taken into account from the .outp file
+    std::string intName = "NEW_def2-TZVPPD-RIFIT";  //For the dipole integrals
     // Absorption parameters
-    std::vector<int32_t> nki = {88,66};  //Number of k-points per G_{i} direction (Monkhorst-Pack grid) to discretize the BZ
+    std::vector<int32_t> nki = {100,100};  //Number of k-points per G_{i} direction (Monkhorst-Pack grid) to discretize the BZ
     double scissor = 0.;                 //Rigid upwards traslation of the conduction bands, in eV
     double broadening = 0.05;            //Gaussian broadening for the Delta funcion, in eV
-    double omega0 = 1.5;                 //First frequency value, in eV
-    double omega1 = 4.5;                 //Last frequency value, in eV
-    uint32_t nomega = 901;               //Number of points in the frequency grid, between omega0 and omega1
-    std::string savefile = "BSE";        //Result will be saved in file Results/4-Absorption/savefile.absorSP
+    double omega0 = 3.0;                 //First frequency value, in eV
+    double omega1 = 8.0;                 //Last frequency value, in eV
+    uint32_t nomega = 751;               //Number of points in the frequency grid, between omega0 and omega1
+    std::string savefile = "BSEabsor";   //Result will be saved in file Results/4-Absorption/savefile.absorSP
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     xatu::ConfigurationCRYSTAL_MPI CRYSTALconfig(outp_file, procMPI_rank, procMPI_size, ncells, true);

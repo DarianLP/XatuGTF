@@ -1,5 +1,6 @@
 // #define ARMA_ALLOW_FAKE_GCC
 #include <mpi.h>
+#include <tclap/CmdLine.h>
 #include "xatu.hpp"
 
 int main(int argc, char* argv[]){
@@ -20,15 +21,15 @@ int main(int argc, char* argv[]){
     }
 
     // INPUT PARAMETERS /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    std::string outp_file = "InputFiles/Pho_PBE0_1D_0f.outp"; 
-    int ncells = 43;                                 //Number of H(R) and S(R) matrices taken into account from the .outp file
-    std::string exciton_file = "InputFiles/Pho_88x66_alpha.txt";
+    std::string outp_file = "InputFiles/hBN_HSE06.outp"; 
+    int ncells = 179;                                 //Number of H(R) and S(R) matrices taken into account from the .outp file
+    std::string exciton_file = "InputFiles/hBN_GAUSSIAN.txt";
     uint metric = 0;                                  //0 for the overlap metric, 1 for the attenuated Coulomb metric (integrals must be pre-computed)
-    std::string intName = "custom";    //For the metric (2C & 3C) and Ewald/Coulomb (2C)
-    std::string savefile = "custom_100x100";                     //Result will be saved in file Results/2-BSEHamiltonian/savefile.exch
+    std::string intName = "NEW_def2-TZVPPD-RIFIT";    //For the metric (2C & 3C) and Ewald/Coulomb (2C)
+    std::string savefile = "BSE";                     //Result will be saved in file Results/2-BSEHamiltonian/savefile.exch
     // Deltak points 
-    double DK = 1./100.;                                  //Deltak in fractional coordinates
-    arma::mat Deltakpoints = {{DK,0.},{0.,DK}};  //In frac coordinates, not containing opposites
+    double DK = 1./151.;                                  //Deltak in fractional coordinates
+    arma::mat Deltakpoints = {{DK,0.},{0.,DK},{-DK,DK}};  //In frac coordinates, not containing opposites
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     xatu::ConfigurationCRYSTAL_MPI CRYSTALconfig(outp_file, procMPI_rank, procMPI_size, ncells, true);
