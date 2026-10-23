@@ -43,4 +43,20 @@ Once compilation completes successfully, XatuGTF is ready to use.
 
 ## Usage
 
-Instructions for running calculations and post-processing the results will be provided here.
+In order for **XatuGTF** to run calculations for a given material, it needs two files: 
+- **.outp file** — Properties output file of CRYSTAL.
+- **basis.txt file** — Basis used in the properties calculation of CRYSTAL, with the same format as in the .d12 file.
+
+The input properties file (.d3) must contain the following keywords:
+```bash
+BASISSET
+2
+60 nR
+64 nR
+END
+```
+This will print in the .outp file the Fock and overlap matrix in real space for a number nR of Bravais lattice vectors, i.e. $H(\mathbf{R}), S(\mathbf{R})$. Make sure to substitue in the .d3 file nR by the number of cells you wish to take into account. Once that is set, go into main and go to the file whose name indicates the calculation you want to perform. You will find a section with the input parameters, which you must choose. Once that is set, from the XatuGTF directory run the following
+```bash
+mpirun -np insert_ncores bin/xatuGTF_insert_specific_calculation
+```
+Once the calculation has finished, you will find the results in the file Results. 
