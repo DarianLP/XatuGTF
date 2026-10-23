@@ -55,7 +55,12 @@ BASISSET
 64 nR
 END
 ```
-This will print in the .outp file the Fock and overlap matrix in real space for a number nR of Bravais lattice vectors, i.e. $H(\mathbf{R}), S(\mathbf{R})$. Make sure to substitue in the .d3 file nR by the number of cells you wish to take into account. Once that is set, go into main and go to the file whose name indicates the calculation you want to perform. You will find a section with the input parameters, which you must choose. Once that is set, from the XatuGTF directory run the following
+This will print in the .outp file the Fock and overlap matrix in real space for a number nR of Bravais lattice vectors, i.e. $H(\mathbf{R}), S(\mathbf{R})$. Make sure to substitue in the .d3 file nR by the number of cells you wish to take into account. Once that is set, go into main and go to the file whose name indicates the calculation you want to perform. You will find a section with the input parameters, which you must choose. In order to compile the changes you made main, you must run from the XatuGTF directory
+```bash
+source xatu_config
+make xatuGTF_compute_insert_specific_calculation
+```
+Once that is set, from the XatuGTF directory run the following
 ```bash
 mpirun -np insert_ncores bin/xatuGTF_insert_specific_calculation
 ```
